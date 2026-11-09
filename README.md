@@ -1,6 +1,6 @@
 # Federico San Lorenzo — Portfolio
 
-Sitio de una sola página con el portfolio de Federico San Lorenzo: data analyst y productos digitales en Buenos Aires.
+Portfolio de Federico San Lorenzo: data analyst y productos digitales en Buenos Aires. La home presenta el estudio y un caso destacado; el listado completo vive en `proyectos.html`.
 
 - 14 proyectos, mostrados solo con capturas y texto.
 - Las demos **no tienen links públicos**: se muestran únicamente en una reunión. Cada proyecto lleva a la agenda de Calendly.
@@ -22,7 +22,9 @@ Es HTML, CSS y un poco de JavaScript, sin build.
 ## Estructura
 
 ```
-index.html            página única
+index.html            inicio
+proyectos.html        página exclusiva de los 14 proyectos
+contacto.html         quién soy, agenda, WhatsApp y mail
 css/styles.css        estilos (papel #F4F3F0, tinta #111, Anton + Inter)
 js/main.js            menú mobile y galería de imágenes
 assets/img/projects/  capturas en WebP (900 px y hasta 1800 px)
