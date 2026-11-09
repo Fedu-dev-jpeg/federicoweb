@@ -8,7 +8,7 @@
       toggle.setAttribute('aria-expanded', String(open));
       toggle.textContent = open ? 'Cerrar' : 'Menú';
     });
-    nav.querySelectorAll('a[href^="#"]').forEach((a) =>
+    nav.querySelectorAll('a').forEach((a) =>
       a.addEventListener('click', () => {
         nav.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
