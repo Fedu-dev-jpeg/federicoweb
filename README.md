@@ -24,6 +24,7 @@ Es HTML, CSS y un poco de JavaScript, sin build.
 ```
 index.html            inicio
 proyectos.html        página exclusiva de los 14 proyectos
+contacto.html         quién soy, agenda, WhatsApp y mail
 css/styles.css        estilos (papel #F4F3F0, tinta #111, Anton + Inter)
 js/main.js            menú mobile y galería de imágenes
 assets/img/projects/  capturas en WebP (900 px y hasta 1800 px)
