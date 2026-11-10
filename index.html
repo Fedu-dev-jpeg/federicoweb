@@ -30,14 +30,14 @@
 <body>
   <a class="skip" href="proyectos.html">Saltar a los proyectos</a>
   <header class="topbar">
-    <a class="brand" href="index.html#top" aria-label="Federico San Lorenzo, inicio">
+    <a class="brand" href="/" aria-label="Federico San Lorenzo, inicio">
       <img src="assets/brand/favicon-192.png" width="40" height="40" alt="">
       <span>Federico San Lorenzo</span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menú</button>
     <nav id="nav" class="nav" aria-label="Principal">
       <a href="proyectos.html">Proyectos</a>
-      <a href="index.html#freelance">Freelance</a>
+      <a href="/#freelance">Freelance</a>
       <a href="contacto.html">Contacto</a>
       <a class="nav-cta" href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar una reunión</a>
     </nav>
@@ -121,6 +121,20 @@
         <li><span class="service-name">Software a medida /</span><span class="service-desc">Plataformas y herramientas pensadas para cómo trabaja tu equipo.</span></li>
         <li><span class="service-name">Data Analytics.</span><span class="service-desc">Tableros y reportes para decidir con datos.</span></li>
       </ul>
+      <div class="recommender" id="recommender" aria-labelledby="recommender-title">
+        <h3 id="recommender-title" class="recommender-title">¿Qué servicio te sirve?</h3>
+        <p class="recommender-intro">Contame en pocas palabras qué querés lograr y te recomiendo el servicio que mejor encaja. Es una demo gratuita del software que desarrollo.</p>
+        <form id="recommender-form" class="recommender-form">
+          <label for="project-desc" class="visually-hidden">Describí tu proyecto</label>
+          <textarea id="project-desc" name="project-desc" rows="3" placeholder="Ej: quiero un sitio para mostrar mis trabajos y que la gente me contacte…" required></textarea>
+          <button type="submit" class="btn">Ver recomendación</button>
+        </form>
+        <div id="recommender-result" class="recommender-result" aria-live="polite" hidden>
+          <p class="result-service"></p>
+          <p class="result-reason"></p>
+          <p class="result-cta"></p>
+        </div>
+      </div>
       <div class="freelance-cta">
         <p>¿Tenés un proyecto en mente? Contame qué necesitás y lo vemos juntos.</p>
         <a class="btn btn-xl" href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar una reunión</a>
@@ -137,12 +151,11 @@
           <p>Soy Federico San Lorenzo. Si querés ver un proyecto en vivo o conversar un trabajo nuevo, agendá 30 minutos o escribinme.</p>
           <p class="contact-actions">
             <a class="btn" href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar una reunión</a>
-            <a class="wa-link" href="https://wa.me/5491153182087" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="wa-text">WhatsApp</span></a>
+            <a class="wa-fab" href="https://wa.me/5491153182087" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
           </p>
         </div>
         <ul class="contact-links">
           <li><span>Agenda</span><a href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar una reunión →</a></li>
-          <li><span>WhatsApp</span><a href="https://wa.me/5491153182087" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> +54 9 11 5318-2087</a></li>
           <li><span>Más</span><a href="contacto.html">Quién soy y cómo agendar →</a></li>
         </ul>
       </div>
@@ -152,7 +165,7 @@
   <footer class="footer">
     <p>Las demos se muestran únicamente en reunión.</p>
     <p class="footer-credit">Logo: La gran ola de Kanagawa, Katsushika Hokusai (dominio público).</p>
-    <p>Federico San Lorenzo</p>
+    <p><a href="/" class="footer-home">Federico San Lorenzo</a></p>
   </footer>
 
   <dialog class="lightbox" aria-label="Galería de imágenes">

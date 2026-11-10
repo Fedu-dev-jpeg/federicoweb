@@ -107,3 +107,90 @@
   });
   lb.addEventListener('close', () => { img.src = ''; if (lastFocus) lastFocus.focus(); });
 })();
+
+(() => {
+  const form = document.getElementById('recommender-form');
+  const result = document.getElementById('recommender-result');
+  if (!form || !result) return;
+
+  const services = {
+    web: {
+      name: 'Diseño web',
+      desc: 'Un sitio o landing clara que lleve a una acción concreta.',
+      cta: '<a href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar para hablar de tu sitio →</a>'
+    },
+    software: {
+      name: 'Software a medida',
+      desc: 'Una plataforma o herramienta pensada para cómo trabaja tu equipo.',
+      cta: '<a href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar para hablar de tu plataforma →</a>'
+    },
+    data: {
+      name: 'Data Analytics',
+      desc: 'Tableros y reportes para decidir con datos.',
+      cta: '<a href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar para hablar de tus datos →</a>'
+    },
+    meeting: {
+      name: 'Agendemos una reunión',
+      desc: 'Tu caso no encaja directo en un servicio, pero hablando lo resolvemos.',
+      cta: '<a href="https://calendly.com/fslcoach/30min" target="_blank" rel="noopener">Agendar 30 minutos →</a>'
+    }
+  };
+
+  const webKeywords = /\b(sitio|web|landing|pagina|página|portfolio|portafolio|tienda|e-?commerce|catalogo|catálogo|vitrina|blog|mostrar|presentar|vender online|venta online|wordpress|diseño web)\b/i;
+  const softwareKeywords = /\b(plataforma|app|aplicación|aplicacion|sistema|dashboard|panel|herramienta|automatizar|automatización|crm|erp|integración|integracion|api|login|usuarios|gestión|gestion|intranet|saas|producto digital|mvp)\b/i;
+  const dataKeywords = /\b(datos|data|analitica|analítica|analytics|tablero|reporte|bi|power bi|looker|metabase|kpi|métricas|metricas|sql|python|visualización|visualizacion|predicción|prediccion)\b/i;
+
+  function fallbackRecommend(text) {
+    const t = text.toLowerCase();
+    const webScore = (t.match(webKeywords) || []).length;
+    const softwareScore = (t.match(softwareKeywords) || []).length;
+    const dataScore = (t.match(dataKeywords) || []).length;
+    const max = Math.max(webScore, softwareScore, dataScore);
+    if (max === 0) return 'meeting';
+    if (webScore === max) return 'web';
+    if (softwareScore === max) return 'software';
+    return 'data';
+  }
+
+  async function aiRecommend(text) {
+    const endpoint = window.FSL_AI_ENDPOINT || '/api/recommend';
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description: text })
+      });
+      if (!res.ok) throw new Error('AI unavailable');
+      const data = await res.json();
+      if (data.service && services[data.service]) return data.service;
+      throw new Error('Invalid response');
+    } catch {
+      return null;
+    }
+  }
+
+  function showResult(key) {
+    const s = services[key];
+    result.querySelector('.result-service').textContent = s.name;
+    result.querySelector('.result-reason').textContent = s.desc;
+    result.querySelector('.result-cta').innerHTML = s.cta;
+    result.hidden = false;
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const desc = form.querySelector('textarea').value.trim();
+    if (!desc) return;
+
+    const recommender = document.getElementById('recommender');
+    recommender.classList.add('is-loading');
+    result.hidden = true;
+
+    let service = await aiRecommend(desc);
+    if (!service) service = fallbackRecommend(desc);
+
+    recommender.classList.remove('is-loading');
+    showResult(service);
+  });
+})();
